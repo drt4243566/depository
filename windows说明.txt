@@ -1,0 +1,56 @@
+Windows
+=======
+要求：
+*  Visual Studio 2013以上版本，The VS 2015 Community version 可以下载：https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx
+*  Windows 7 以上系统，Windows 10, Windows 8.1, Windows 7已验证。
+*  需要安装设备驱动“SensorDriver.exe”
+
+步骤：
+
+ 1)在的SDK路径的/samples/vs2013 或 /samples/vs2015 目录下找到 Astra-samples.sln
+ 2)用Visual Studio 2013 或 Visual Studio 2015打开对应的 .sln 文件 ,选择release模式
+ 3）编译工程。
+
+ 如需在Visual Studio中启动示例程序，可以右键点击待启动的工程文件，然后选择‘Set as StartUp Project’，就可以将该示例程序设置为启动项目。之后通过使用菜单中的 DEBUG -> Start Debugging 或点击键盘上的 F5 键来进行debug
+
+
+提示
+====
+
+您可以按Control-C来退出命令行窗口的例程。例程会捕获按键信息并自动释放资源。
+带GUI窗口的例程，则可以按Control-C，escape，或者直接关闭窗口。
+
+我们强烈推荐用C++ API或者更高级语言的封装来进行开发。
+C API则在需要绑定其它语言，或者在某些特定环境下更合适。
+
+文档
+====
+
+初步的HTML格式文档可以在sdk/docs路径找到
+
+已知问题
+========
+
+* 运行的时候如果没有摄像头连着，或者找不到摄像头，SDK不会弹出错误信息，也不会crash。
+  目前还不支持摄像头的热插拔
+
+* 如果某个例程crash了，或者在SDK关闭摄像头之前就强制把应用程序退出了，摄像头驱动可能变得不正常。
+  简单的解决方法是重新插拔摄像头。
+
+* 如果某些例程在您的电脑上运行起来比较慢，请确保您编译的是Release版本。如果您用的是OSX build_samples.sh脚本，默认就是Release的。
+
+* 在Unity 5.5.4+版本，MaskedColorStream里的人体会略有卡顿
+
+* 文档还比较有限。我们会在后续的版本里添加完整的API文档。
+
+* 骨架旋转角度可能不一致，特别是做了某些特殊动作之后，比如手伸直再做旋转的时候。
+
+* PC上，骨架跟踪可以轻松做到实时运行，但用于显示的SFML有个已知的兼容问题会导致部分骨架相关例程（比如SimpleBodyViewer-SFML）变慢，我们暂时还没有解决这个bug。
+
+* Android上，骨架跟踪的CPU性能还在持续提升中。在奥比中光的Persee设备上，把所有stream打开的时候，Unity例程大概可以达到15FPS。
+
+* 以下API目前还在开发中：摄像头硬件参数设置（如白平衡，曝光等），激光控制，等等。
+
+* 使用UVC设备时可能会提示打不开设备的情况，暂时不支持两个UVC设备同时使用。
+
+* 多人出现在视野范围内时，可能将两人（两人比较近）识别人同一个人，或者将人和相近的物体识别成同一个人，该问题正在优化中。
